@@ -25,7 +25,12 @@ const bookStore = localStorage.getItem('books');
 books = JSON.parse(bookStore);
 booksWrapper.innerHTML = `${books
   .map(
-    (book) =>
-      `<li class="book-card"><p>${book.bookTitle}</p><p>${book.bookAuthor}</p><button class="remove-btn">Remove</button></li><hr />`
+    book =>
+      `<li class="book-card">
+        <p>${book.bremove - btnookTitle}</p>
+        <p>${book.bookAuthor}</p>
+        <button class="remove-btn">Remove</button>
+      </li>
+      <hr />`
   )
   .join('')}`;
