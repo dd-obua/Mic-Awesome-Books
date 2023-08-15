@@ -34,3 +34,5 @@ booksWrapper.innerHTML = `${books
       <hr />`
   )
   .join('')}`;
+
+const removeBtn = document.querySelector('.remove-btn');
