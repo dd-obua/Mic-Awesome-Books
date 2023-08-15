@@ -19,6 +19,10 @@ const AddBook = () => {
   // this.location.reload();
 };
 
+const removeBook = title => {
+  books = books.filter(book => book.title !== title);
+};
+
 btnAdd.addEventListener('click', AddBook);
 
 if (localStorage.length > 0) {
@@ -26,7 +30,7 @@ if (localStorage.length > 0) {
   books = JSON.parse(bookStore);
   booksWrapper.innerHTML = `${books
     .map(
-      (book) =>
+      book =>
         `<li class="book-card">
         <p>${book.bookTitle}</p>
         <p>${book.bookAuthor}</p>
@@ -38,3 +42,5 @@ if (localStorage.length > 0) {
 }
 
 const removeBtn = document.querySelector('.remove-btn');
+console.log(removeBtn);
+removeBtn.addEventListener('click', removeBook);
