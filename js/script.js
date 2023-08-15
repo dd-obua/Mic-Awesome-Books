@@ -1,9 +1,22 @@
-const books = [];
+const booksWrapper = document.querySelector('.books-wrapper');
+const pTilte = document.createElement('p');
+const pAuthor = document.createElement('p');
+const btnAdd = document.querySelector('.add-btn');
+const bookTitleInput = document.querySelector('.title');
+const bookAuthorInput = document.querySelector('.author');
 
-function addBook(title, author) {
-  return `"${title}" by ${author} `;
-}
+let books = [{ bookTitle: 'Lorem ipsum', bookAuthor: 'Testeroo Testyy' }];
 
-const addBtn = document.querySelector('.add-btn');
-const title = document.querySelector('.title');
-const author = document.querySelector('.author');
+const AddBook = () => {
+  pTilte.innerText = bookTitleInput.value;
+  pAuthor.innerText = bookAuthorInput.value;
+  const bookObject = {
+    bookTitle: bookTitleInput.value,
+    bookAuthor: bookAuthorInput.value,
+  };
+  books.push(bookObject);
+  localStorage.setItem('books', JSON.stringify(books));
+  // this.location.reload();
+};
+
+btnAdd.addEventListener('click', AddBook);
