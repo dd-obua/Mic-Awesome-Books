@@ -8,7 +8,7 @@ let bookStore;
 let card;
 
 let books = [];
-const AddBook = () => {
+const addBook = () => {
   pTilte.innerText = bookTitleInput.value;
   pAuthor.innerText = bookAuthorInput.value;
   console.log(bookAuthorInput.value);
@@ -34,7 +34,7 @@ btnAdd.addEventListener('click', () => {
     bookTitleInput.value.trim().length !== 0 &&
     bookAuthorInput.value.trim().length !== 0
   ) {
-    AddBook();
+    addBook();
   }
 });
 
@@ -43,7 +43,7 @@ if (localStorage.length > 0) {
   books = JSON.parse(bookStore);
   booksWrapper.innerHTML = `${books
     .map(
-      (book) =>
+      book =>
         `<li class="book-card">
         <p class="book-title">${book.bookTitle}</p>
         <p class="book-author">${book.bookAuthor}</p>
