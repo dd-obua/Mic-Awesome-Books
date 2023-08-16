@@ -36,21 +36,26 @@ btnAdd.addEventListener('click', () => {
     addBook();
 });
 
-if (localStorage.length > 0) {
-  bookStore = localStorage.getItem('books');
-  books = JSON.parse(bookStore);
-  booksWrapper.innerHTML = `${books
-    .map(
-      book =>
-        `<li class="book-card">
-          <p><span class="book-title">${book.bookTitle} by </span><span class="book-author">${book.bookAuthor}</span></p>
-          <button class="remove-btn">Remove</button>
-        </li>
-        <hr />
-        `
-    )
-    .join('')}`;
-}
+bookStore = localStorage.getItem('books');
+books = JSON.parse(bookStore);
+
+const showBookList = () => {
+  if (localStorage.length > 0) {
+    booksWrapper.innerHTML = `${books
+      .map(
+        book =>
+          `<li class="book-card">
+            <p><span class="book-title">${book.bookTitle} by </span><span class="book-author">${book.bookAuthor}</span></p>
+            <button class="remove-btn">Remove</button>
+          </li>
+          <hr />
+          `
+      )
+      .join('')}`;
+  }
+};
+
+showBookList();
 
 const removeBtns = document.querySelectorAll('.remove-btn');
 removeBtns.forEach(btn => {
