@@ -36,10 +36,11 @@ btnAdd.addEventListener('click', () => {
     addBook();
 });
 
+bookStore = localStorage.getItem('books');
+books = JSON.parse(bookStore);
+
 const showBookList = () => {
   if (localStorage.length > 0) {
-    bookStore = localStorage.getItem('books');
-    books = JSON.parse(bookStore);
     booksWrapper.innerHTML = `${books
       .map(
         (book) =>
@@ -57,6 +58,7 @@ const showBookList = () => {
       .join('')}`;
   }
 };
+
 showBookList();
 
 const removeBtns = document.querySelectorAll('.remove-btn');
