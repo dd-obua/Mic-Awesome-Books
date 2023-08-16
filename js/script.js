@@ -23,8 +23,8 @@ const updateStorage = () => {
   localStorage.setItem('books', JSON.stringify(books));
 };
 
-const removeBook = title => {
-  books = books.filter(book => book.bookTitle !== title);
+const removeBook = (title) => {
+  books = books.filter((book) => book.bookTitle !== title);
   updateStorage();
 };
 
@@ -42,13 +42,16 @@ const showBookList = () => {
     books = JSON.parse(bookStore);
     booksWrapper.innerHTML = `${books
       .map(
-        book =>
-          `<li class="book-card">
+        (book) =>
+          `<div class="book-card">
           <p class="book-title">
-            ${book.bookTitle} by <span class="book-author">${book.bookAuthor}</span>
+            ${book.bookTitle}
+          </p>
+          <p class="book-title">
+           ${book.bookAuthor}
           </p>
           <button class="remove-btn">Remove</button>
-        </li>
+        </div>
         <hr />`
       )
       .join('')}`;
@@ -57,12 +60,11 @@ const showBookList = () => {
 showBookList();
 
 const removeBtns = document.querySelectorAll('.remove-btn');
-removeBtns.forEach(btn => {
-  btn.addEventListener('click', e => {
+removeBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
     card = e.target.closest('.book-card');
     const title = card.querySelector('.book-title');
     const author = card.querySelector('.book-author');
-    console.log(title.innerText);
     removeBook(title.innerText);
     this.location.reload();
   });
