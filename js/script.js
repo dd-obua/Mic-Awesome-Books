@@ -4,20 +4,19 @@ const pAuthor = document.createElement('p');
 const btnAdd = document.querySelector('.add-btn');
 const bookTitleInput = document.querySelector('.title');
 const bookAuthorInput = document.querySelector('.author');
+let bookStore;
 let card;
 
 let books = [];
-
 const AddBook = () => {
   pTilte.innerText = bookTitleInput.value;
   pAuthor.innerText = bookAuthorInput.value;
   const bookObject = {
-    bookTitle: bookTitleInput.value,
-    bookAuthor: bookAuthorInput.value,
+    bookTitle: bookTitleInput.value.trim(),
+    bookAuthor: bookAuthorInput.value.trim(),
   };
   books.push(bookObject);
   localStorage.setItem('books', JSON.stringify(books));
-  // this.location.reload();
 };
 
 const updateStorage = () => {
@@ -25,21 +24,21 @@ const updateStorage = () => {
 };
 
 const removeBook = (title) => {
-  books = books.filter((book) => book.title !== title);
+  books = books.filter((book) => book.bookTitle !== title);
   updateStorage();
 };
 
 btnAdd.addEventListener('click', AddBook);
 
 if (localStorage.length > 0) {
-  const bookStore = localStorage.getItem('books');
+  bookStore = localStorage.getItem('books');
   books = JSON.parse(bookStore);
   booksWrapper.innerHTML = `${books
     .map(
       (book) =>
         `<li class="book-card">
-        <p class="title">${book.bookTitle}</p>
-        <p>${book.bookAuthor}</p>
+        <p class="book-title">${book.bookTitle}</p>
+        <p class="book-author">${book.bookAuthor}</p>
         <button class="remove-btn">Remove</button>
       </li>
       <hr />`
@@ -48,16 +47,13 @@ if (localStorage.length > 0) {
 }
 
 const removeBtns = document.querySelectorAll('.remove-btn');
-// console.log(removeBtn);
-// removeBtn.addEventListener('click', removeBook);
 removeBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
     card = e.target.closest('.book-card');
-    console.log(card);
-    // removeBook();
+    const title = card.querySelector('.book-title');
+    const author = card.querySelector('.book-author');
+    console.log(title.innerText);
+    removeBook(title.innerText);
+    this.location.reload();
   });
 });
-
-// removeBtn.addEventListener('click', () => {
-//   console.log('clicked');
-// });
