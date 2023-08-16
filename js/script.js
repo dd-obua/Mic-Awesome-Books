@@ -11,6 +11,7 @@ let books = [];
 const AddBook = () => {
   pTilte.innerText = bookTitleInput.value;
   pAuthor.innerText = bookAuthorInput.value;
+  console.log(bookAuthorInput.value);
   const bookObject = {
     bookTitle: bookTitleInput.value.trim(),
     bookAuthor: bookAuthorInput.value.trim(),
@@ -28,7 +29,14 @@ const removeBook = (title) => {
   updateStorage();
 };
 
-btnAdd.addEventListener('click', AddBook);
+btnAdd.addEventListener('click', () => {
+  if (
+    bookTitleInput.value.trim().length !== 0 &&
+    bookAuthorInput.value.trim().length !== 0
+  ) {
+    AddBook();
+  }
+});
 
 if (localStorage.length > 0) {
   bookStore = localStorage.getItem('books');
