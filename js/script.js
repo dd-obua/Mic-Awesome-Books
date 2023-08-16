@@ -4,7 +4,6 @@ const pAuthor = document.createElement('p');
 const btnAdd = document.querySelector('.add-btn');
 const bookTitleInput = document.querySelector('.title');
 const bookAuthorInput = document.querySelector('.author');
-let bookStore;
 let card;
 
 let books = [];
@@ -30,21 +29,19 @@ const removeBook = (title) => {
 
 btnAdd.addEventListener('click', () => {
   if (
-    bookTitleInput.value.trim().length !== 0 &&
-    bookAuthorInput.value.trim().length !== 0
-  )
-    addBook();
+    bookTitleInput.value.trim().length !== 0
+    && bookAuthorInput.value.trim().length !== 0
+  ) { addBook(); }
 });
 
-bookStore = localStorage.getItem('books');
+const bookStore = localStorage.getItem('books');
 books = JSON.parse(bookStore);
 
 const showBookList = () => {
   if (localStorage.length > 0) {
     booksWrapper.innerHTML = `${books
       .map(
-        (book) =>
-          `<div class="book-card">
+        (book) => `<div class="book-card">
           <p class="book-title">
             ${book.bookTitle}
           </p>
@@ -53,7 +50,7 @@ const showBookList = () => {
           </p>
           <button class="remove-btn">Remove</button>
         </div>
-        <hr />`
+        <hr />`,
       )
       .join('')}`;
   }
@@ -66,7 +63,6 @@ removeBtns.forEach((btn) => {
   btn.addEventListener('click', (e) => {
     card = e.target.closest('.book-card');
     const title = card.querySelector('.book-title');
-    const author = card.querySelector('.book-author');
     removeBook(title.innerText);
     this.location.reload();
   });
